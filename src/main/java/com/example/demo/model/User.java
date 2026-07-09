@@ -26,6 +26,7 @@ public class User {
     private Integer id;
     private String email;
     private String username;
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "tb_m_role_id")

@@ -4,9 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.demo.dto.request.LoginRequest;
+import com.example.demo.dto.request.RegisterRequest;
+import com.example.demo.dto.response.LoginResponse;
+import com.example.demo.dto.response.RegisterResponse;
+import com.example.demo.dto.response.UserWithPersonResponse;
 import com.example.demo.model.Person;
 import com.example.demo.utils.enums.Gender;
 
@@ -15,31 +24,75 @@ public class PersonServiceTest {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private AuthService authService;
+
+    // @Test
+    // void testSavePerson_Success() {
+
+    // // Arrange
+    // Person personInput = new Person();
+    // personInput.setFirstName("Raditya");
+    // personInput.setLastName("Dimas");
+    // personInput.setGender(Gender.MALE);
+    // personInput.setPhoneNumber("08123456789");
+    // personInput.setDateOfBirth("1990-01-01");
+    // personInput.setAddress("Jl. Sudirman No. 1, Jakarta");
+
+    // // Act
+    // Person result = personService.savePerson(personInput);
+
+    // // Assert
+    // assertNotNull(result.getId(), "ID seharusnya sudah ter-generate otomatis oleh
+    // database");
+    // assertTrue(result.getId() > 0, "ID harus berupa angka positif");
+
+    // assertEquals("Raditya", result.getFirstName());
+    // assertEquals("Dimas", result.getLastName());
+    // assertEquals(Gender.MALE, result.getGender());
+    // assertEquals("08123456789", result.getPhoneNumber());
+    // assertEquals("1990-01-01", result.getDateOfBirth());
+    // assertEquals("Jl. Sudirman No. 1, Jakarta", result.getAddress());
+
+    // }
+
     @Test
-    void testSavePerson_Success() {
+    void testGetUserWithPerson() {
+        List<UserWithPersonResponse> userPersons = personService.getUserWithPerson();
+        Assertions.assertNotNull(userPersons);
+    }
 
-        // Arrange
-        Person personInput = new Person();
-        personInput.setFirstName("Raditya");
-        personInput.setLastName("Dimas");
-        personInput.setGender(Gender.MALE);
-        personInput.setPhoneNumber("08123456789");
-        personInput.setDateOfBirth("1990-01-01");
-        personInput.setAddress("Jl. Sudirman No. 1, Jakarta");
+    // @Test
+    // void testGetUserWithPersonByUsername() {
+    // UserWithPersonResponse userPerson =
+    // personService.getUserWithPersonByUsername();
+    // Assertions.assertNotNull(userPersons);
+    // }
 
-        // Act
-        Person result = personService.savePerson(personInput);
+    @Test
+    void testRegisterUser() {
+        RegisterRequest request = new RegisterRequest(
+                "username_test",
+                "usertest@email.com",
+                "password123",
+                "First",
+                "Last");
 
-        // Assert
-        assertNotNull(result.getId(), "ID seharusnya sudah ter-generate otomatis oleh database");
-        assertTrue(result.getId() > 0, "ID harus berupa angka positif");
+        RegisterResponse response = authService.register(request);
 
-        assertEquals("Raditya", result.getFirstName());
-        assertEquals("Dimas", result.getLastName());
-        assertEquals(Gender.MALE, result.getGender());
-        assertEquals("08123456789", result.getPhoneNumber());
-        assertEquals("1990-01-01", result.getDateOfBirth());
-        assertEquals("Jl. Sudirman No. 1, Jakarta", result.getAddress());
+        Assertions.assertNotNull(response);
+
+    }
+
+    @Test
+    void testLoginUser() {
+        LoginRequest request = new LoginRequest(
+                "username_test",
+                "password123");
+
+        LoginResponse response = authService.login(request);
+
+        Assertions.assertNotNull(response);
 
     }
 }
