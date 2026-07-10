@@ -29,6 +29,10 @@ public class PersonService {
         return personRepository.findAll();
     }
 
+    public Integer getLatestId() {
+        return personRepository.findTopByOrderByIdDesc().getId();
+    }
+
     public Optional<Person> getPersonById(Integer id) {
         return personRepository.findById(id);
     }
@@ -44,8 +48,17 @@ public class PersonService {
     public Person updatePerson(Integer id, Person personDetails) {
         Optional<Person> person = personRepository.findById(id);
         if (person.isPresent()) {
+            Person existingPerson = person.get();
+            existingPerson.setFirstName(personDetails.getFirstName());
+            existingPerson.setLastName(personDetails.getLastName());
+            existingPerson.setGender(personDetails.getGender());
+            existingPerson.setPhoneNumber(personDetails.getPhoneNumber());
+            existingPerson.setDateOfBirth(personDetails.getDateOfBirth());
+            existingPerson.setAddress(personDetails.getAddress());
+            return personRepository.save(existingPerson);
+        } else {
+            return null;
         }
-        return personRepository.save(personDetails);
     }
 
 }

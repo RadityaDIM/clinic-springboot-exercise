@@ -27,34 +27,31 @@ public class PersonServiceTest {
     @Autowired
     private AuthService authService;
 
-    // @Test
-    // void testSavePerson_Success() {
+    @Test
+    void testSavePerson_Success() {
 
-    // // Arrange
-    // Person personInput = new Person();
-    // personInput.setFirstName("Raditya");
-    // personInput.setLastName("Dimas");
-    // personInput.setGender(Gender.MALE);
-    // personInput.setPhoneNumber("08123456789");
-    // personInput.setDateOfBirth("1990-01-01");
-    // personInput.setAddress("Jl. Sudirman No. 1, Jakarta");
+        // Arrange
+        Person personInput = new Person();
+        personInput.setFirstName("Raditya");
+        personInput.setLastName("Dimas");
+        personInput.setGender(Gender.MALE);
+        personInput.setPhoneNumber("08123456789");
+        personInput.setDateOfBirth("1990-01-01");
+        personInput.setAddress("Jl. Sudirman No. 1, Jakarta");
 
-    // // Act
-    // Person result = personService.savePerson(personInput);
+        // Act
+        Person result = personService.savePerson(personInput);
 
-    // // Assert
-    // assertNotNull(result.getId(), "ID seharusnya sudah ter-generate otomatis oleh
-    // database");
-    // assertTrue(result.getId() > 0, "ID harus berupa angka positif");
+        // Assert
 
-    // assertEquals("Raditya", result.getFirstName());
-    // assertEquals("Dimas", result.getLastName());
-    // assertEquals(Gender.MALE, result.getGender());
-    // assertEquals("08123456789", result.getPhoneNumber());
-    // assertEquals("1990-01-01", result.getDateOfBirth());
-    // assertEquals("Jl. Sudirman No. 1, Jakarta", result.getAddress());
+        assertEquals("Raditya", result.getFirstName());
+        assertEquals("Dimas", result.getLastName());
+        assertEquals(Gender.MALE, result.getGender());
+        assertEquals("08123456789", result.getPhoneNumber());
+        assertEquals("1990-01-01", result.getDateOfBirth());
+        assertEquals("Jl. Sudirman No. 1, Jakarta", result.getAddress());
 
-    // }
+    }
 
     @Test
     void testGetUserWithPerson() {
@@ -94,5 +91,18 @@ public class PersonServiceTest {
 
         Assertions.assertNotNull(response);
 
+    }
+
+    @Test
+    void testUpdateUser() {
+        Person person = new Person();
+        person.setFirstName("Raditya");
+        person.setLastName("Dimas");
+        person.setGender(Gender.MALE);
+        person.setPhoneNumber("08123456789");
+        person.setDateOfBirth("1990-01-01");
+        person.setAddress("Jl. Sudirman No. 1, Jakarta");
+        Person result = personService.updatePerson(personService.getLatestId(), person);
+        assertNotNull(result);
     }
 }

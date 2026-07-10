@@ -45,8 +45,6 @@ public class AuthService {
         user.setPerson(person);
         person.setUser(user);
 
-        // user.setRole();
-
         // save user biar dpt id dan data lainnya
         User savedUser = userRepository.save(user);
 

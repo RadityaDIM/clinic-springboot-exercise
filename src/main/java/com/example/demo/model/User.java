@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_m_user")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
     private String username;
@@ -32,9 +33,7 @@ public class User {
     @JoinColumn(name = "tb_m_role_id")
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Person person;
 
     // @OneToOne

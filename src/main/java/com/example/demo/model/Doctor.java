@@ -11,10 +11,12 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_m_doctor")
 public class Doctor {
     @Id
@@ -22,8 +24,8 @@ public class Doctor {
     private Integer id;
     private String speciality;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tb_m_user_id")
+    @OneToOne
+    @JoinColumn(name = "tb_m_user_id", unique = true) // Kolom foreign key, dan harus unik
     private User user;
 
 }

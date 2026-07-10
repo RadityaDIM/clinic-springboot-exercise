@@ -9,4 +9,6 @@ import com.example.demo.model.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
     public Role findTopByOrderByLevelAsc();
+
+    public Role findRoleByName(String name);
 }

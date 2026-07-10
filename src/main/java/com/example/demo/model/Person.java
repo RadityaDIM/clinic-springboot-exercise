@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,7 +26,6 @@ import lombok.NoArgsConstructor;
 public class Person {
     // Harus ada primary key
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // untuk auto increment
     private Integer id;
     private String firstName;
     private String lastName;
@@ -40,6 +41,8 @@ public class Person {
         this.id = id;
     }
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
     private User user;
 }

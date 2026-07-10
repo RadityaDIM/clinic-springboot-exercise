@@ -2,9 +2,10 @@ package com.example.demo.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,14 +20,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_m_patient")
 public class Patient {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String bloodType;
     private Integer height;
     private Integer weight;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "id")
+    @OneToOne
+    @JoinColumn(name = "tb_m_user_id", unique = true) // Kolom foreign key, dan harus unik
     private User user;
 
     public Patient(Integer id) {
