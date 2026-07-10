@@ -11,10 +11,12 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_tr_medical_record")
 public class MedicalRecord {
     @Id
@@ -22,6 +24,10 @@ public class MedicalRecord {
     private Integer id;
     private String symptoms;
     private String result;
+
+    @ManyToOne
+    @JoinColumn(name = "tb_m_medicine_id")
+    private Medicine medicine;
 
     @OneToOne
     @JoinColumn(name = "tb_tr_appointment_id")

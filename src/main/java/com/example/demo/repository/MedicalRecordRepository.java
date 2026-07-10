@@ -8,4 +8,5 @@ import com.example.demo.model.MedicalRecord;
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Integer> {
 
+    //
 }
