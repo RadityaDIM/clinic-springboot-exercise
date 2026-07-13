@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,4 +12,6 @@ import com.example.demo.model.Medicine;
 public interface MedicineRepository extends JpaRepository<Medicine, Integer> {
     @Query("SELECT m FROM Medicine m WHERE m.id = :id")
     public Medicine findMedicineById(@Param("id") Integer id);
+
+    Optional<Medicine> findByName(String name);
 }

@@ -1,5 +1,7 @@
 package com.example.demo.dto.request;
 
+import java.util.List;
+
 import com.example.demo.model.Appointment;
 import com.example.demo.model.Disease;
 import com.example.demo.model.Medicine;
@@ -12,8 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MedicalRecordRequest {
-    private Appointment appointment;
+    private Integer appointmentId;
     private String diagnosis;
-    private Disease disease;
-    private Medicine medicine;
+    private Integer diseaseId;
+
+    private List<MedicineRequest> medicine;
 }
