@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,4 +39,6 @@ public class MedicalRecord {
     @JoinColumn(name = "tb_m_disease_id")
     private Disease disease;
 
+    @OneToOne(mappedBy = "medicalRecord", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Admission admission;
 }

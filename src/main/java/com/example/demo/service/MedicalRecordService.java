@@ -44,7 +44,8 @@ public class MedicalRecordService {
     public Disease insertDiseaseDataDummy() {
         Disease disease = new Disease();
         disease.setName("Flu");
-        return disease;
+
+        return diseaseRepository.save(disease);
     }
 
     public MedicalRecordResponse createMedicalRecord(MedicalRecordRequest request, String result) {
