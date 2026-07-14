@@ -83,8 +83,8 @@ public class AppointmentServiceTest {
         doctor.setUser(savedUserForDoctor);
         Doctor savedDoctor = doctorRepository.save(doctor);
 
-        request.setPatient(savedPatient);
-        request.setDoctor(savedDoctor);
+        request.setPatientId(savedPatient.getId());
+        request.setDoctorId(savedDoctor.getId());
         request.setAppointmentDate(LocalDate.now());
 
         AppointmentResponse response = appointmentService.bookAppointment(request);

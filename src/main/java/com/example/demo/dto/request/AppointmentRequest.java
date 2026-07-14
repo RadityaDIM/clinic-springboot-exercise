@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppointmentRequest {
-    private Patient patient;
-    private Doctor doctor;
+    private Integer patientId;
+    private Integer doctorId;
     private LocalDate appointmentDate;
     private Status status;
 

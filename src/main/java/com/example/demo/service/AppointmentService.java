@@ -32,24 +32,18 @@ public class AppointmentService {
     private DoctorRepository doctorRepository;
 
     public AppointmentResponse bookAppointment(AppointmentRequest request) {
-        if (request.getPatient() == null || request.getPatient().getId() == null) {
-            throw new IllegalArgumentException("Patient ID harus disediakan.");
+        Patient patient = patientRepository.findPatientById(request.getPatientId());
+        Doctor doctor = doctorRepository.findDoctorById(request.getDoctorId());
+
+        if (patient == null) {
+            throw new IllegalArgumentException("Data pasien tidak ditemukan.");
         }
-        if (request.getDoctor() == null || request.getDoctor().getId() == null) {
-            throw new IllegalArgumentException("Doctor ID harus disediakan.");
+        if (doctor == null) {
+            throw new IllegalArgumentException("Data dokter tidak ditemukan");
         }
         if (request.getAppointmentDate() == null) {
             throw new IllegalArgumentException("Tanggal appointment harus disediakan.");
         }
-
-        Patient patient = patientRepository.findById(request.getPatient().getId())
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Patient tidak ditemukan dengan ID: " + request.getPatient().getId()));
-
-        Doctor doctor = doctorRepository.findById(request.getDoctor().getId())
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Doctor tidak ditemukan dengan ID: " + request.getDoctor().getId()));
-
         Appointment appointment = new Appointment();
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);

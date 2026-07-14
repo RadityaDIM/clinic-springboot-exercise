@@ -59,7 +59,8 @@ public class AuthService {
 
         User user = userRepository.findUserByUsername(loginRequest.getUsername());
 
-        if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        if (user != null && passwordEncoder
+                .matches(loginRequest.getPassword(), user.getPassword())) {
             return new LoginResponse(user.getId(), user.getUsername(), user.getPerson());
         } else {
             throw new IllegalArgumentException("Invalid username or password");
