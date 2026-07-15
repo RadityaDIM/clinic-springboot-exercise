@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Admission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDateTime admissionDate;
+    private LocalDate admissionDate;
     private String dischargeDate;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.utils.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +37,7 @@ public class Person {
     private Gender gender;
 
     private String phoneNumber;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String address;
 
     public Person(Integer id) {
@@ -43,6 +46,7 @@ public class Person {
 
     @OneToOne
     @MapsId
+    @JsonIgnore
     @JoinColumn(name = "id")
     private User user;
 }

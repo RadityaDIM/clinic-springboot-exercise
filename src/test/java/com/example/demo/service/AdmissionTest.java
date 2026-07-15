@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ public class AdmissionTest {
         roomRepository.save(room);
 
         AdmissionRequest admissionRequest = new AdmissionRequest();
-        admissionRequest.setAdmissionDate(LocalDateTime.now());
+        admissionRequest.setAdmissionDate(LocalDate.now());
         admissionRequest.setMedicalRecordId(1);
         admissionRequest.setRoomId(1);
 

@@ -65,14 +65,14 @@ public class MedicalRecordService {
         ;
         Disease disease = diseaseRepository.findDiseaseById(request.getDiseaseId());
 
-        // input data dummyyy
-        if (medicineRepository.count() == 0) {
-            insertMedicineDataDummy();
-        }
+        // // input data dummyyy
+        // if (medicineRepository.count() == 0) {
+        // insertMedicineDataDummy();
+        // }
 
-        if (diseaseRepository.count() == 0) {
-            insertDiseaseDataDummy();
-        }
+        // if (diseaseRepository.count() == 0) {
+        // insertDiseaseDataDummy();
+        // }
 
         if (appointment.getStatus() != Status.RESERVED) {
             throw new IllegalArgumentException("Appointment status must be reserved.");

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.PersonRepository;
@@ -41,24 +42,30 @@ public class PersonService {
         return userRepository.findUserIncludePerson();
     }
 
-    // public UserWithPersonResponse getUserWithPersonByUsername(String username) {
-    // return userRepository.findUserByUsername(username);
-    // }
-
-    public Person updatePerson(Integer id, Person personDetails) {
-        Optional<Person> person = personRepository.findById(id);
-        if (person.isPresent()) {
-            Person existingPerson = person.get();
-            existingPerson.setFirstName(personDetails.getFirstName());
-            existingPerson.setLastName(personDetails.getLastName());
-            existingPerson.setGender(personDetails.getGender());
-            existingPerson.setPhoneNumber(personDetails.getPhoneNumber());
-            existingPerson.setDateOfBirth(personDetails.getDateOfBirth());
-            existingPerson.setAddress(personDetails.getAddress());
-            return personRepository.save(existingPerson);
-        } else {
-            return null;
+    public Person updatePerson(@NonNull Integer id, Person personDetails) {
+        Person existingPerson = personRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Update gagal: data person tidak ditemukan"));
+        if (personDetails != null) {
+            if (personDetails.getFirstName() != null) {
+                existingPerson.setFirstName(personDetails.getFirstName());
+            }
+            if (personDetails.getLastName() != null) {
+                existingPerson.setLastName(personDetails.getLastName());
+            }
+            if (personDetails.getGender() != null) {
+                existingPerson.setGender(personDetails.getGender());
+            }
+            if (personDetails.getPhoneNumber() != null) {
+                existingPerson.setPhoneNumber(personDetails.getPhoneNumber());
+            }
+            if (personDetails.getDateOfBirth() != null) {
+                existingPerson.setDateOfBirth(personDetails.getDateOfBirth());
+            }
+            if (personDetails.getAddress() != null) {
+                existingPerson.setAddress(personDetails.getAddress());
+            }
         }
+        return personRepository.save(existingPerson);
     }
 
 }
