@@ -71,4 +71,8 @@ public class AppointmentService {
     public List<AppointmentWithPatientAndDoctor> displayAllAppointmentWithPatientAndDoctor() {
         return appointmentRepository.getAllAppointmentWithPatientAndDoctor();
     }
+
+    public List<AppointmentWithPatientAndDoctor> displayAllAppointmentByPatientId(Integer patientId) {
+        return appointmentRepository.getAppointmentByPatientId(patientId);
+    }
 }

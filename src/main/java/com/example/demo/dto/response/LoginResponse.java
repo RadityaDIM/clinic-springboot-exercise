@@ -1,5 +1,7 @@
 package com.example.demo.dto.response;
 
+import javax.management.relation.Role;
+
 import com.example.demo.model.Person;
 
 import lombok.AllArgsConstructor;
@@ -13,4 +15,6 @@ public class LoginResponse {
     private Integer id;
     private String username;
     private Person person;
+    private String token;
+    private Integer roleId;
 }

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -22,7 +23,7 @@ public class PersonController {
     private final PersonService personService;
 
     @PutMapping("update/{id}")
-    public ResponseEntity<Object> update(@PathVariable Integer id, @RequestBody Person person,
+    public ResponseEntity<Object> update(@PathVariable @NonNull Integer id, @RequestBody Person person,
             @RequestHeader(name = "x-token") String token) {
         try {
             personService.updatePerson(id, person);

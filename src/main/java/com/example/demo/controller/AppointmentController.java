@@ -64,4 +64,22 @@ public class AppointmentController {
         }
     }
 
+    @GetMapping("/display/{id}")
+    public ResponseEntity<Object> displayAppointmentByPatientID(@PathVariable Integer id,
+            @RequestHeader(name = "x-token") String token) {
+        try {
+            List<AppointmentWithPatientAndDoctor> listAppointment = appointmentService
+                    .displayAllAppointmentByPatientId(id);
+            if (listAppointment.isEmpty()) {
+                return GenerateResponse.generateResponseEntity(HttpStatus.OK,
+                        "Data jadwal kunjungan dengan ID Pasien " + id + " tidak ditemukan atau belum ada.");
+            }
+            return GenerateResponse.generateResponseEntity(HttpStatus.OK, "Data jadwal kunjungan berhasil didapatkan.",
+                    listAppointment);
+        } catch (Exception e) {
+            return GenerateResponse.generateResponseEntity(HttpStatus.BAD_REQUEST,
+                    "Data gagal diambil, error : " + e.getMessage());
+        }
+    }
+
 }

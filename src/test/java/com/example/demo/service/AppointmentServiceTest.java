@@ -48,7 +48,7 @@ public class AppointmentServiceTest {
     public void testBookAppointment() {
         AppointmentRequest request = new AppointmentRequest();
 
-        User userForPatient = userRepository.findUserByUsername("username_test");
+        User userForPatient = userRepository.findUserByUsername("username_test").orElse(null);
 
         Patient patient = new Patient();
         patient.setUser(userForPatient);
@@ -63,7 +63,7 @@ public class AppointmentServiceTest {
         personForDoctor.setLastName("Doctor");
         personForDoctor.setGender(Gender.MALE);
         personForDoctor.setPhoneNumber("0822222222");
-        personForDoctor.setDateOfBirth("1985-05-05");
+        personForDoctor.setDateOfBirth(LocalDate.of(2003, 10, 10));
         personForDoctor.setAddress("Doctor Address");
 
         Role doctorRole = roleRepository.findRoleByName("ROLE_DOCTOR");

@@ -2,8 +2,6 @@ package com.example.demo.dto.request;
 
 import java.time.LocalDate;
 
-import com.example.demo.model.Doctor;
-import com.example.demo.model.Patient;
 import com.example.demo.utils.enums.Status;
 
 import lombok.AllArgsConstructor;

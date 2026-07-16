@@ -28,6 +28,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private String token;
 
     @ManyToOne
     @JoinColumn(name = "tb_m_role_id")
@@ -35,6 +36,11 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Person person;
+
+    public User orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
 
     // @OneToOne
     // @JoinColumn(name = "tb_m_person_id")

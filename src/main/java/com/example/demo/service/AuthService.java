@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +13,19 @@ import com.example.demo.model.Person;
 import com.example.demo.model.User;
 import com.example.demo.repository.PersonRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.JWT.CustomUserDetails;
+import com.example.demo.utils.JWT.JwtService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     private final RoleRepository roleRepository;
-
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    AuthService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public RegisterResponse register(RegisterRequest registerRequest) {
         Person person = new Person();
@@ -57,11 +53,14 @@ public class AuthService {
 
     public LoginResponse login(LoginRequest loginRequest) {
 
-        User user = userRepository.findUserByUsername(loginRequest.getUsername());
+        User user = userRepository.findUserByUsername(loginRequest.getUsername()).orElseThrow(
+                () -> new IllegalArgumentException("Invalid username or password"));
 
-        if (user != null && passwordEncoder
-                .matches(loginRequest.getPassword(), user.getPassword())) {
-            return new LoginResponse(user.getId(), user.getUsername(), user.getPerson());
+        if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            CustomUserDetails userDetails = new CustomUserDetails(user);
+            String token = jwtService.generateToken(userDetails);
+            return new LoginResponse(user.getId(), user.getUsername(), user.getPerson(), token,
+                    user.getRole().getId());
         } else {
             throw new IllegalArgumentException("Invalid username or password");
         }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -36,7 +37,7 @@ public class PersonServiceTest {
         personInput.setLastName("Dimas");
         personInput.setGender(Gender.MALE);
         personInput.setPhoneNumber("08123456789");
-        personInput.setDateOfBirth("1990-01-01");
+        personInput.setDateOfBirth(LocalDate.of(2000, 9, 15));
         personInput.setAddress("Jl. Sudirman No. 1, Jakarta");
 
         // Act
@@ -100,7 +101,7 @@ public class PersonServiceTest {
         person.setLastName("Dimas");
         person.setGender(Gender.MALE);
         person.setPhoneNumber("08123456789");
-        person.setDateOfBirth("1990-01-01");
+        person.setDateOfBirth(LocalDate.of(2002, 10, 20));
         person.setAddress("Jl. Sudirman No. 1, Jakarta");
         Person result = personService.updatePerson(personService.getLatestId(), person);
         assertNotNull(result);

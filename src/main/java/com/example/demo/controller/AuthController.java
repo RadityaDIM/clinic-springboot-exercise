@@ -30,7 +30,7 @@ public class AuthController {
             LoginResponse loginResponse = authService.login(loginRequest);
             return GenerateResponse.generateResponseEntity(HttpStatus.OK, "Login Berhasil", loginResponse);
         } catch (Exception e) {
-            return GenerateResponse.generateResponseEntity(HttpStatus.OK, e.getMessage());
+            return GenerateResponse.generateResponseEntity(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class AuthController {
             RegisterResponse registerResponse = authService.register(registerRequest);
             return GenerateResponse.generateResponseEntity(HttpStatus.OK, "Register Berhasil", registerResponse);
         } catch (Exception e) {
-            return GenerateResponse.generateResponseEntity(HttpStatus.OK, e.getMessage());
+            return GenerateResponse.generateResponseEntity(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
